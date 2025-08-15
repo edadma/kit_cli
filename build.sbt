@@ -17,8 +17,8 @@ ThisBuild / sonatypeProfileName := "io.github.edadma"
 
 ThisBuild / scmInfo := Some(
   ScmInfo(
-    url("https://github.com/edadma/cross_template"),
-    "scm:git@github.com:edadma/cross_template.git",
+    url("https://github.com/edadma/kit_cli"),
+    "scm:git@github.com:edadma/kit_cli.git",
   ),
 )
 ThisBuild / developers := List(
@@ -30,7 +30,7 @@ ThisBuild / developers := List(
   ),
 )
 
-ThisBuild / homepage := Some(url("https://github.com/edadma/cross_template"))
+ThisBuild / homepage := Some(url("https://github.com/edadma/kit_cli"))
 
 ThisBuild / publishTo := {
   val centralSnapshots = "https://central.sonatype.com/repository/maven-snapshots/"
@@ -38,10 +38,10 @@ ThisBuild / publishTo := {
   else localStaging.value
 }
 
-lazy val cross_template = crossProject(JSPlatform, JVMPlatform, NativePlatform)
+lazy val kit_cli = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   .in(file("."))
   .settings(
-    name := "cross_template",
+    name := "kit_cli",
     scalacOptions ++=
       Seq(
         "-deprecation",
@@ -52,13 +52,13 @@ lazy val cross_template = crossProject(JSPlatform, JVMPlatform, NativePlatform)
         "-language:existentials",
         "-language:dynamics",
       ),
-//    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.19" % "test",
-//    libraryDependencies ++= Seq(
-//      "io.github.edadma" %%% "cross-platform" % "0.0.4"
-//    ),
+    libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.19" % "test",
     libraryDependencies ++= Seq(
-//      "com.github.scopt" %%% "scopt" % "4.1.0",
-//      "com.lihaoyi" %%% "pprint" % "0.9.0" % "test",
+      "io.github.edadma" %%% "path" % "0.0.1",
+    ),
+    libraryDependencies ++= Seq(
+      "com.github.scopt" %%% "scopt"  % "4.1.0",
+      "com.lihaoyi"      %%% "pprint" % "0.9.0" % "test",
     ),
     publishMavenStyle      := true,
     Test / publishArtifact := false,
@@ -85,9 +85,9 @@ lazy val cross_template = crossProject(JSPlatform, JVMPlatform, NativePlatform)
 
 lazy val root = project
   .in(file("."))
-  .aggregate(cross_template.js, cross_template.jvm, cross_template.native)
+  .aggregate(kit_cli.js, kit_cli.jvm, kit_cli.native)
   .settings(
-    name                := "cross_template",
+    name                := "kit_cli",
     publish / skip      := true,
     publishLocal / skip := true,
   )
