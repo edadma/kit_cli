@@ -6,7 +6,7 @@ package io.github.edadma.kit_cli
     case Some(config) =>
       CommandExecutor.execute(config)
     case None =>
-      // scopt already printed error message and help
-      System.exit(1)
+    // scopt already printed error message and help
+//      sys.exit(1)
   }
 }

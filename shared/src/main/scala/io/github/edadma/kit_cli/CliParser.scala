@@ -353,26 +353,9 @@ object InitCommandImpl {
   }
 
   private def inferAuthor(): String = {
-    // Only try git detection on JVM and Native platforms
-    if (platform == "js") {
-      ""
-    } else {
-      try {
-        import scala.sys.process._
-        val nameResult  = Process("git config user.name").!!.trim
-        val emailResult = Process("git config user.email").!!.trim
-
-        if (nameResult.nonEmpty && emailResult.nonEmpty) {
-          s"$nameResult <$emailResult>"
-        } else if (nameResult.nonEmpty) {
-          nameResult
-        } else {
-          ""
-        }
-      } catch {
-        case _: Exception => ""
-      }
-    }
+    // TODO: Add platform-specific git detection later
+    // For now, just return empty string - users can enter manually
+    ""
   }
 
   private def generateTomlContent(config: KitTomlConfig): String = {
@@ -416,7 +399,6 @@ object InitCommandImpl {
     sb.toString
   }
 }
-
 // Test runner with print statements
 object CommandExecutor {
 
