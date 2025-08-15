@@ -4,7 +4,6 @@ import scopt.OParser
 import io.github.edadma.path.Path
 import scala.io.StdIn
 import scala.util.{Try, Success, Failure}
-import scala.sys.process._
 import toml.derivation.auto._
 import toml.Toml
 
@@ -348,26 +347,31 @@ object InitCommandImpl {
   }
 
   private def inferProjectName(currentDir: Path): String = {
-    val dirName = currentDir.toAbsolutePath.filename
+    val dirName = currentDir.toAbsolutePath.filename.toString
     // Convert to lowercase and replace invalid characters
     dirName.toLowerCase.replaceAll("[^a-z0-9-_]", "-")
   }
 
   private def inferAuthor(): String = {
-    // Try to get author from git config
-    try {
-      val nameResult  = scala.sys.process.Process("git config user.name").!!.trim
-      val emailResult = scala.sys.process.Process("git config user.email").!!.trim
+    // Only try git detection on JVM and Native platforms
+    if (platform == "js") {
+      ""
+    } else {
+      try {
+        import scala.sys.process._
+        val nameResult  = Process("git config user.name").!!.trim
+        val emailResult = Process("git config user.email").!!.trim
 
-      if (nameResult.nonEmpty && emailResult.nonEmpty) {
-        s"$nameResult <$emailResult>"
-      } else if (nameResult.nonEmpty) {
-        nameResult
-      } else {
-        ""
+        if (nameResult.nonEmpty && emailResult.nonEmpty) {
+          s"$nameResult <$emailResult>"
+        } else if (nameResult.nonEmpty) {
+          nameResult
+        } else {
+          ""
+        }
+      } catch {
+        case _: Exception => ""
       }
-    } catch {
-      case _: Exception => ""
     }
   }
 
@@ -412,6 +416,7 @@ object InitCommandImpl {
     sb.toString
   }
 }
+
 // Test runner with print statements
 object CommandExecutor {
 
