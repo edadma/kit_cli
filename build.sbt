@@ -54,7 +54,7 @@ lazy val kit_cli = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       ),
     libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.19" % "test",
     libraryDependencies ++= Seq(
-      "io.github.edadma" %%% "path" % "0.0.3",
+      "io.github.edadma" %%% "path" % "0.0.4",
     ),
     libraryDependencies ++= Seq(
       "com.github.scopt"  %%% "scopt"  % "4.1.0",
@@ -73,7 +73,7 @@ lazy val kit_cli = crossProject(JSPlatform, JVMPlatform, NativePlatform)
   )
   .jsSettings(
     jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(),
-    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+    scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.CommonJSModule) },
     //  scalaJSLinkerConfig ~= { _.withModuleSplitStyle(ModuleSplitStyle.SmallestModules) },
     scalaJSLinkerConfig ~= { _.withSourceMap(false) },
     //    Test / scalaJSUseMainModuleInitializer := true,
