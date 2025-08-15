@@ -1,8 +1,10 @@
 package io.github.edadma.kit_cli
 
+import io.github.edadma.cross_platform.processArgs
+
 // Main entry point - delegates to CLI parser
 @main def run(args: String*): Unit = {
-  CliParser.parse(args.toArray) match {
+  CliParser.parse(processArgs(args).toArray) match {
     case Some(config) =>
       CommandExecutor.execute(config)
     case None =>
