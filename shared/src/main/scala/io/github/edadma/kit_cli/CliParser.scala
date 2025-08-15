@@ -227,10 +227,6 @@ object CliParser {
       cmd("check")
         .action((_, c) => c.copy(command = Some(CheckCommand())))
         .text("Validate kit.toml and dependencies"),
-      checkConfig(c =>
-        if (c.command.isEmpty) failure("No command specified")
-        else success,
-      ),
     )
   }
 
