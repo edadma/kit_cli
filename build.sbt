@@ -54,7 +54,7 @@ lazy val kit_cli = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       ),
     libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.19" % "test",
     libraryDependencies ++= Seq(
-      "io.github.edadma" %%% "path" % "0.0.1",
+      "io.github.edadma" %%% "path" % "0.0.3",
     ),
     libraryDependencies ++= Seq(
       "com.github.scopt"  %%% "scopt"  % "4.1.0",
