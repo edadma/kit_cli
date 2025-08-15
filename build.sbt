@@ -57,8 +57,9 @@ lazy val kit_cli = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       "io.github.edadma" %%% "path" % "0.0.1",
     ),
     libraryDependencies ++= Seq(
-      "com.github.scopt" %%% "scopt"  % "4.1.0",
-      "com.lihaoyi"      %%% "pprint" % "0.9.0" % "test",
+      "com.github.scopt"  %%% "scopt"  % "4.1.0",
+      "com.indoorvivants" %%% "toml"   % "0.3.0",
+      "com.lihaoyi"       %%% "pprint" % "0.9.3" % "test",
     ),
     publishMavenStyle      := true,
     Test / publishArtifact := false,
