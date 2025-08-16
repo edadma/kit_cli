@@ -474,7 +474,7 @@ object CommandExecutor {
 
           // Validation
           case CheckCommand() =>
-            println("✅ Checking kit.toml and dependencies")
+            CheckCommandImpl.execute(config.global)
         }
     }
   }
