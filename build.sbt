@@ -54,6 +54,7 @@ lazy val kit_cli = crossProject(JSPlatform, JVMPlatform, NativePlatform)
       ),
     libraryDependencies ++= Seq(
       "io.github.edadma" %%% "path"           % "0.0.4",
+      "io.github.edadma" %%% "fetch"          % "0.0.1",
       "io.github.edadma" %%% "cross_platform" % "0.0.20",
     ),
     libraryDependencies ++= Seq(
