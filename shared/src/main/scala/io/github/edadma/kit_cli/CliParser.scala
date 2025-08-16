@@ -2,7 +2,7 @@ package io.github.edadma.kit_cli
 
 import scopt.OParser
 import io.github.edadma.path.Path
-import scala.io.StdIn
+import io.github.edadma.cross_platform.readLine
 import scala.util.{Try, Success, Failure}
 import toml.derivation.auto._
 import toml.Toml
@@ -331,9 +331,7 @@ object InitCommandImpl {
 
   private def promptWithDefault(prompt: String, default: String): String = {
     val displayDefault = if (default.nonEmpty) s" ($default)" else ""
-    print(s"$prompt:$displayDefault ")
-
-    val input = StdIn.readLine()
+    val input          = readLine(s"$prompt:$displayDefault ")
     if (input == null) {
       // Handle Ctrl+C
       throw new InterruptedException()
